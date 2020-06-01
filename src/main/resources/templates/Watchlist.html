@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,7 +10,6 @@
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <!-- Place favicon.ico in the root directory -->
-
     <!-- CSS here -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
@@ -81,12 +82,24 @@
     </div>
     <!-- /bradcam_area  -->
       	
-<button class="btn btn-primary" onclick="window.location.href='/watchlistItemForm';"> Add new accommodation </button>
-     <div class="container">
+	<div data-scroll-index="0" class="get_in_tauch_area">
+        <div class="container">
+            <div class="row justify-content-Left">
+                <div class="col-lg-6">
+                    <div class="section_title text-Left mb-50">
+                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">Accommodations you shared</h3>
+                    </div>
+                </div>  
+            </div>  
+          <div class="col-xl-12">
+         <button class="btn btn-primary wow fadeInUp"  data-wow-duration="1s" data-wow-delay=".8s" onclick="window.location.href='/watchlistItemForm';"> Add new accommodation </button>   
+       	</div>
+        <div class="container">
             <div class="row justify-content-center">
               <div class="col-xl-12">
                <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
                 <table class="table table-striped" id = 'mytable' style="width:100%">
+                
 
                     
                     <thead>
@@ -104,27 +117,26 @@
 
                   <tbody>
                   
-                    <tr th:each="watchlistItem : ${useritems}">
+                    <tr th:each="watchlistItem : ${items}">
                         <td th:text="${watchlistItem.country}"></td>
                             <td th:text="${watchlistItem.address}"></td>
                               <td th:text="${#dates.format(watchlistItem.dateFrom, 'dd/MM/yyyy')}"></td>
                               <td th:text="${#dates.format(watchlistItem.dateTo, 'dd/MM/yyyy')}"></td>
                               <td th:text="${watchlistItem.hdesc}"></td>
                               <td th:text="${watchlistItem.comment}"></td>
-                      <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">Update</a>
+ <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">Update</a>
                       <a th:href="@{/watchlistItemForm/delete/(id=${watchlistItem.id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
                     </tr>
                   </tbody>
                   
                 </table>
 
-				</div>
-            </div>
+				 </div>
+            	</div>
             </div>
         </div>              
        </div>
 	</div>
-
 
     <!-- update watchlist start-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -218,7 +230,7 @@
       </div>
     </div>
   </div>
-</div>
+
  <!-- update watchlist end-->
  
  <!-- delete watchlist start-->
@@ -242,6 +254,8 @@
   </div>
 </div>
 <!-- delete watchlist end-->
+
+
 
     <!-- footer start -->
     <footer class="footer">
