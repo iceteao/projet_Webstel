@@ -1,0 +1,377 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>StartUp</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.foundation.min.css"> 
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="index.html">
+                                    <img src="img/Weblogo.png" width="136" height="36" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8">
+                            <div class="main-menu  d-none d-lg-block text-center">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="/">home</a></li>
+                                        <li><a href="/acc">Accommodation</a></li>
+                                        <li><a class="active" href="/watchlist">Share</a></li>
+                                        <li><a href="/login">log out</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+     <!-- bradcam_area  -->
+     <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                     <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">Your Accommodation</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /bradcam_area  -->
+      	
+	<div data-scroll-index="0" class="get_in_tauch_area">
+        <div class="container">
+            <div class="row justify-content-Left">
+                <div class="col-lg-6">
+                    <div class="section_title text-Left mb-50">
+                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">Accommodations you shared</h3>
+                    </div>
+                </div>  
+            </div>  
+          <div class="col-xl-12">
+         <button class="btn btn-primary wow fadeInUp"  data-wow-duration="1s" data-wow-delay=".8s" onclick="window.location.href='/watchlistItemForm';"> Add new accommodation </button>   
+       	</div>
+        <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-xl-12">
+               <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
+                <table class="table table-striped" id = 'mytable' style="width:100%">
+                
+
+                    
+                    <thead>
+                        <tr>
+                          <th class="text-left">Country</th>
+                            <th class="text-left">Address</th>
+                          <th class="text-left">From</th>
+                          <th class="text-left">To</th>
+                          <th class="text-left">Description</th>
+                            <th class="text-left">Comment</th>
+                            <th class="text-left"></th>
+                        </tr>
+                    </thead>
+
+
+                  <tbody>
+
+                    <div th:each="profiledetails : ${userdetails}">
+                        	<span th:text="${profiledetails.aboutme}"></span>
+                            <span th:text="${profiledetails.country} "></span>
+                              <span th:text="${profiledetails.mobile} "></span>
+                              <span th:text="${profiledetails.website}"></span>
+                     
+ 	<a class="btn btn-info" id="editButton">Update</a>
+	<a class="btn btn-danger" id="deleteButton">Delete</a>
+</div>
+                  </tbody>
+                  
+                </table>
+
+				 </div>
+            	</div>
+            </div>
+        </div>              
+       </div>
+	</div>
+
+    <!-- update watchlist start-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">	
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Edit accommodation</h4>
+        <hr/>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <div class="modal-body">
+        <form th:action="@{/watchlistItemForm/update}" method="put">     
+           <div class="row justify-content-left">
+                <div class="col-xl-12">
+                    <div class="touch_form">  
+
+
+					<div class="mt-10">
+					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+					       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
+			         </div>
+			         
+			          
+
+					<div class="mt-10">
+						<span>Country</span>
+			            <input type="text" class="single-input" id="countryedit" name="country" placeholder="Country" onblur="this.placeholder = 'Country'" required>
+			         </div>
+
+			        
+			         
+					<div class="mt-10">
+					 	<span>Address</span>
+			            <input type="text" class="single-input" id="addressedit" name="address" placeholder="Address" onblur="this.placeholder = 'Address'" required>
+			          </div>
+          
+               <div class="input-group fetched-date">          
+
+ 					<div class="mt-10">
+ 						<span>From</span>
+						<input type="text" class="single-input" id ="dateFromedit" name="dateFrom" placeholder="Starting date" onblur="this.placeholder = 'Starting date'" required/>
+					</div>
+ 					
+ 					<div class="mt-10">
+ 					 	<span>To</span>
+                        <input type="text" class="single-input" id="dateToedit" name="dateTo" placeholder="Ending date" onblur="this.placeholder = 'Ending date'" required />
+                    </div>
+
+               </div>
+                          
+   					<div class="mt-10">
+   					 	<span>House description</span>
+			            <textarea class="single-input" name = "hdesc"  id ="hdescedit" rows = "2" placeholder = "House description" onblur="this.placeholder = 'House description'"></textarea>            
+                    </div>
+
+        
+   					<div class="mt-10">
+   						<span>Service</span>
+				        <textarea name= "service" id="serviceedit" class = "single-input" rows = "2" placeholder = "Service that you want" onblur="this.placeholder = 'Service that you want'"></textarea>
+               		</div>               
+        
+
+   					<div class="mt-10">
+   					   <span>Constraint</span>
+			           <textarea id="limitedit" name="limit" class = "single-input" rows = "2" placeholder = "The constraint/limitations that you want to impose" onblur="this.placeholder = 'The constraint/limitations that you want to impose'"></textarea>
+		           </div>
+
+   					<div class="mt-10">
+   					   <span>Comment</span>
+			           <textarea id="commentedit" name="comment" class = "single-input" rows = "2" placeholder = "Some comment about the house" onblur="this.placeholder = 'Some comment about the house'"></textarea>
+			     </div>
+
+
+						</div>
+					</div>
+			     </div>
+
+   
+     	 <div class="modal-footer">
+				<div class = "form-group row">
+						<button type="submit" class="btn btn-primary">Submit</button>
+	     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			 	</div>
+			 	</div>
+              		</form>
+           </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- update watchlist end-->
+ 
+ <!-- delete watchlist start-->
+ <div class="modal" id="deleteModal" tabindex="1" data-backdrop="false" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete watchlist end-->
+
+
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-3">
+                        <div class="footer_logo wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
+                            <a href="index.html">
+                                <img src=src="img/Weblogo.png" width="136" height="36" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="socail_links">
+                            <ul>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s" href="#"> <i class="fa fa-twitter"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s" href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.3s">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+    
+    
+         <script type="text/javascript"  src="/js/main.js" ></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>  
+
+    
+    
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/jquery-ui-clear.js"></script>
+
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>  
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/dataTableManager.js"></script>
+	<script src="js/Jquery_dateformat.min.js"></script>
+	<script src="js/watchlist.js"></script>
+
+	<script type="text/javascript">
+	$(function() {
+		  $('.fetched-date input').datepicker({
+		    calendarWeeks: true,
+		    todayHighlight: true,
+		    autoclose: true,
+		    dateFormat:"dd/mm/yy",
+		    minDate: 0
+		  });
+		});
+	
+	</script>
+</body>
+</html>
