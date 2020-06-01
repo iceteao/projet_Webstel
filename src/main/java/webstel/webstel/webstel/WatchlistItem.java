@@ -164,6 +164,9 @@ public class WatchlistItem {
 	private User user;
 	private int userid;
 
+	
+
+
 	public int getUserid() {
 		return userid;
 	}
