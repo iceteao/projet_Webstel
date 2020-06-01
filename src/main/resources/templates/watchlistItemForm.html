@@ -1,5 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,8 +10,13 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.foundation.min.css"> 
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -25,9 +29,8 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
-   
+
 <body>
     <!-- header-start -->
     <header>
@@ -46,15 +49,11 @@
                             <div class="main-menu  d-none d-lg-block text-center">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="active" href="/">home</a></li>
-                                        <li><a href="/acc">Accommodation</a></li>
+                                        <li><a href="/">home</a></li>
+                                        <li><a href="/LogAcc">Accommodation</a></li>
                                         <li><a href="/watchlist">Share</a></li>
-                                        <li><a href="#">Account <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="/login">Sign in</a></li>
-                                                <li><a href="/register">Sign up</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="/login">log out</a></li>
+                                    </ul>
                                 </nav>
                             </div>
                         </div>
