@@ -50,7 +50,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="/">home</a></li>
-                                        <li><a href="/acc">Accommodation</a></li>
+                                        <li><a class="active" href="/acc">Accommodation</a></li>
                                         <li><a href="/watchlist">Share</a></li>
                                         <li><a href="#">Account <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
@@ -160,8 +160,7 @@
                               <td th:text="${#dates.format(watchlistItem.dateTo, 'dd/MM/yyyy')}"></td>
                               <td th:text="${watchlistItem.hdesc}"></td>
                               <td th:text="${watchlistItem.comment}"></td>
-                      <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">Update</a>
-                      <a th:href="@{/watchlistItemForm/delete/(id=${watchlistItem.id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
+                      <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">More</a>
                     </tr>
                   </tbody>
                   
@@ -176,88 +175,98 @@
 
 
     <!-- update watchlist start-->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content">	
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Edit accommodation</h4>
+        <hr/>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+
       <div class="modal-body">
         <form th:action="@{/watchlistItemForm/update}" method="put">     
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Username id:</label>
-       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
-       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
-          </div>
-         
-          
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Country:</label>
-            <input type="text" class="form-control" id="countryedit" name="country">
-          </div>
-        
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Address:</label>
-            <input type="text" class="form-control" id="addressedit" name="address">
-          </div>
-          
-          
-               <div class="form-group row">
-				<div class="input-group fetched-date">
-                              <input type="text"  id ="dateFromedit" name="dateFrom"/>
-                              <input type="text" id="dateToedit" name="dateTo"  />
-                       <div class="col-sm-6">
-                                    <span class="text-danger"> </span>      
-                              </div>  
-                          </div>
-                        </div>
-                          
-        
-                   
- 
-        
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">House description</label>
-             <div class = "col-sm-6">
-              <textarea name = "hdesc"  id ="hdescedit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
-                           </div>
-                           
-                          </div>
-        
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">services:</label>
-            <div class = "col-sm-6">
-              <textarea name= "service" id="serviceedit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
-               </div>
-               </div>               +
-        
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">constraints/limitations</label><div class = "col-sm-6">
-           <textarea id="limitedit" name="limit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
-           </div>
-           </div>
-           
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Comments</label><div class = "col-sm-6">
-           <textarea id="commentedit" name="comment" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
-           </div>
-           </div>
+           <div class="row justify-content-left">
+                <div class="col-xl-12">
+                    <div class="touch_form">  
 
-          <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>        
-        </div> 
-             
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+					<div class="mt-10">
+					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+					       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
+			         </div>
+			         
+			          
+
+					<div class="mt-10">
+						<span>Country</span>
+			            <input type="text" class="single-input" id="countryedit" name="country" placeholder="Country" onblur="this.placeholder = 'Country'" readonly>
+			         </div>
+
+			        
+			         
+					<div class="mt-10">
+					 	<span>Address</span>
+			            <input type="text" class="single-input" id="addressedit" name="address" placeholder="Address" onblur="this.placeholder = 'Address'" readonly>
+			          </div>
+          
+               <div class="input-group fetched-date">          
+
+ 					<div class="mt-10">
+ 						<span>From</span>
+						<input type="text" class="single-input" id ="dateFromedit" name="dateFrom" placeholder="Starting date" onblur="this.placeholder = 'Starting date'" readonly/>
+					</div>
+ 					
+ 					<div class="mt-10">
+ 					 	<span>To</span>
+                        <input type="text" class="single-input" id="dateToedit" name="dateTo" placeholder="Ending date" onblur="this.placeholder = 'Ending date'" readonly />
+                    </div>
+
+               </div>
+                          
+   					<div class="mt-10">
+   					 	<span>House description</span>
+			            <textarea class="single-input" name = "hdesc"  id ="hdescedit" rows = "2" placeholder = "House description" onblur="this.placeholder = 'House description'" readonly></textarea>            
+                    </div>
+
+        
+   					<div class="mt-10">
+   						<span>Service</span>
+				        <textarea name= "service" id="serviceedit" class = "single-input" rows = "2" placeholder = "Service that you want" onblur="this.placeholder = 'Service that you want'" readonly></textarea>
+               		</div>               
+        
+
+   					<div class="mt-10">
+   					   <span>Constraint</span>
+			           <textarea id="limitedit" name="limit" class = "single-input" rows = "2" placeholder = "The constraint/limitations that you want to impose" onblur="this.placeholder = 'The constraint/limitations that you want to impose'" readonly></textarea>
+		           </div>
+
+   					<div class="mt-10">
+   					   <span>Comment</span>
+			           <textarea id="commentedit" name="comment" class = "single-input" rows = "2" placeholder = "Some comment about the house" onblur="this.placeholder = 'Some comment about the house'" readonly></textarea>
+			     </div>
+
+
+						</div>
+					</div>
+			     </div>
+
+   
+     	 <div class="modal-footer">
+				<div class = "form-group row">
+						<button type="button" class="btn btn-primary">Book</button>
+	     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			 	</div>
+			 	</div>
+              		</form>
+           </div>
       </div>
     </div>
   </div>
-</div>
+
  <!-- update watchlist end-->
  
  <!-- delete watchlist start-->
