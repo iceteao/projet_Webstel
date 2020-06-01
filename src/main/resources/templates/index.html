@@ -57,20 +57,23 @@
                                         <li><a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
                                        		<ul class="submenu">
                                                 <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
-
                                                 <li><a sec:authorize="!isAuthenticated()" href="/register">Sign up</a></li>
                                             </ul>
                                       </li>
+                                      
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
+                        <div class="col-lg-2 d-none d-lg-block">
+                            <div class="log_chat_area d-flex align-items-end">
+                            <span  class="say_hi" >Welcome &nbsp; </span>
+                            <span  class="say_hi"  th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+      </div>
     </header>
     <!-- header-end -->
 
