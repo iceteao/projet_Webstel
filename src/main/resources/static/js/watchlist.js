@@ -10,8 +10,8 @@ $('document').ready(function() {
 			$('#idEdit').val(watchlistItem.id);
 			$('#countryedit').val(watchlistItem.country);
 			$('#addressedit').val(watchlistItem.address);
-			$('#dateFromedit').val(watchlistItem.dateFrom);
-			$('#dateToedit').val(watchlistItem.dateTo);
+			$('#dateFromedit').val($.format.date(watchlistItem.dateFrom,"dd/MM/yyyy"));
+			$('#dateToedit').val($.format.date(watchlistItem.dateTo,"dd/MM/yyyy"));
 			$('#hdescedit').val(watchlistItem.hdesc);
 			$('#serviceedit').val(watchlistItem.service);
 			$('#limitedit').val(watchlistItem.limit);

@@ -10,6 +10,9 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/css/bootstrap-datepicker.min.css" />
+    
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
@@ -212,8 +215,12 @@
                           <input type="text" name="daterange" class="form-control" placeholder = "Any dates" />
                                   </div>
                               </div>
+                            <div class="input-group fetched-date">
                               <input type="text"  id ="dateFromedit" name="dateFrom"/>
+
+
                               <input type="text" id="dateToedit" name="dateTo"  />
+                        	</div>
                        <div class="col-sm-6">
                                     <span class="text-danger"> </span>      
                               </div>  
@@ -381,86 +388,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/main.js"></script>
 
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
+
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>  
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/dataTableManager.js"></script>
+	<script src="js/Jquery_dateformat.min.js"></script>
+	<script src="js/watchlist.js"></script>
+
 	<script type="text/javascript">
-	$(document).ready(function() {
-		 
-	    // DataTable
-	    var table = $('#mytable').DataTable({
-			'sDom': 'rtip' ,
-		      orderCellsTop: true,
-		      responsive: true,
-			           columns: [
-			                      {className: "min-phone-l" },
-			                      {className: "all" },
-			                      {className: "all" }	,
-			                      {className: "all" }	,
-			                      {"bSearchable": false, "bSortable": false, className: "desktop"},
-			                      {"bSearchable": false, "bSortable": false, className: "desktop"},
-			                      {"bSearchable": false, "bSortable": false, className: "all" }
-			    ],
-	      initComplete: function () {
-
-	               $.fn.dataTable.ext.search.push(
-	        function (settings, data, dataIndex) {
-	            var min = $('#min').datepicker("getDate");
-	            var max = $('#max').datepicker("getDate");
-                var d = data[2].split("/");
-                var startDate = new Date(d[1]+ "/" +  d[0] +"/" + d[2]);
-                var d2 = data[3].split("/");
-                var endDate = new Date(d2[1]+ "/" +  d2[0] +"/" + d2[2]);
-                
-                
-                if (min == null && max == null) { return true; }
-                
-                if (max == null && min >= startDate) {
-                	if (min <= endDate){
-                	return true; }
-                }
-                
-                if (min == null && max >= startDate) {
-                	if (max <= endDate){
-                	return true; }
-                }
-                
-                
-                if (max >= startDate && max <= endDate && min >= startDate && min <= endDate) { return true; }
-                return false;
-	        }
-	        );
-
-	       
-	               $("#min").datepicker({ onSelect: function () { table.draw(); }, minDate: 0, dateFormat:"dd/mm/yy"});
-	               $("#max").datepicker({ onSelect: function () { table.draw(); }, minDate: 0, dateFormat:"dd/mm/yy" });
-	            var table = $('#mytable').DataTable(); 
-	      }
-	    });
-
-        function filterColumn () {
-            $('#mytable').DataTable().column(1).search(
-                $('#addr').val()
-            ).draw();
-            $('#mytable').DataTable().column(0).search(
-                $('#country').val()
-            ).draw();  
-              };
-
-           $('input.column_filter').on( 'keyup click', function () {
-                filterColumn( $(this).parents('div').attr('data-column') );
-            } );
-          	
-           var $dates = $('#min, #max').datepicker();
-           $('#clear-dates').on('click', function () {
-        	    $dates.datepicker('setDate', null);    
-        	    table.columns().search().draw();
-        	});
-
-	} );
+	$(function() {
+		  $('.fetched-date input').datepicker({
+		    calendarWeeks: true,
+		    todayHighlight: true,
+		    autoclose: true,
+		    dateFormat:"dd/mm/yy",
+		    minDate: 0
+		  });
+		});
+	
 	</script>
-	<script src="/js/watchlist.js"></script>
+	
 	
 </body>
 </html>
