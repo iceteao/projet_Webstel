@@ -10,9 +10,6 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/css/bootstrap-datepicker.min.css" />
-    
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
@@ -209,22 +206,14 @@
           
           
                <div class="form-group row">
-                              <label for = "dateRange" class = "col-sm-2 col-form-label">Dates</label>
-                              <div class="col-sm-6">
-                                  <div class="input-group">
-                          <input type="text" name="daterange" class="form-control" placeholder = "Any dates" />
-                                  </div>
-                              </div>
-                            <div class="input-group fetched-date">
+				<div class="input-group fetched-date">
                               <input type="text"  id ="dateFromedit" name="dateFrom"/>
-
-
                               <input type="text" id="dateToedit" name="dateTo"  />
-                        	</div>
                        <div class="col-sm-6">
                                     <span class="text-danger"> </span>      
                               </div>  
                           </div>
+                        </div>
                           
         
                    
@@ -243,7 +232,7 @@
             <div class = "col-sm-6">
               <textarea name= "service" id="serviceedit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
                </div>
-               </div>               
+               </div>               +
         
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">constraints/limitations</label><div class = "col-sm-6">
@@ -356,6 +345,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>  
 
+    
+    
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -388,10 +379,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/main.js"></script>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
-
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>  
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
@@ -412,7 +399,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	
 	</script>
-	
-	
 </body>
 </html>
