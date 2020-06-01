@@ -11,9 +11,10 @@ import webstel.webstel.webstel.User;
 
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findById(int id);
 	User findByUsername(String username);
+	List<User> findByUsernameLike(String username);
 
 }

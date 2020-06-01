@@ -23,6 +23,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String emailadd;
+    
 	public String getEmailadd() {
 		return emailadd;
 	}
