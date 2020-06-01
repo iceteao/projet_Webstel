@@ -43,40 +43,40 @@
 
     <form class="login-form" th:action="@{/users/addNew}" method="post">
       <div class="login-wrap">
-        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <p class="login-img"><img src="img/login.png" width="50" height="50" alt=""></p>
         
        <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <span class="input-group-addon"><img src="img/user.png" width="18" height="18" alt=""></span>
           <input type="text" class="form-control" placeholder="Firstname" autofocus name="firstname">
         </div>
         
           <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <span class="input-group-addon"><img src="img/user.png" width="18" height="18" alt=""></span>
           <input type="text" class="form-control" placeholder="Email address" autofocus name="emailadd">
         </div>
         
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <span class="input-group-addon"><img src="img/user.png" width="18" height="18" alt=""></span>
           <input type="text" class="form-control" placeholder="Lastname" autofocus name="lastname">
         </div>
         
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <span class="input-group-addon"><img src="img/user.png" width="18" height="18" alt=""></span>
           <input type="text" class="form-control" placeholder="Username" name="username" autofocus>
         </div>
         
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <span class="input-group-addon"><img src="img/key.png" width="18" height="18" alt=""></span>
           <input type="password" class="form-control" placeholder="Password" id="password" name="password">
         </div>
         
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <span class="input-group-addon"><img src="img/key.png" width="18" height="18" alt=""></span>
           <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword">
         </div>        
         
         <label class="checkbox">
-               <span><a th:href="@{/login}"> Login Page</a></span>
+               <span><a th:href="@{/login}">back</a></span>
                 <span class="pull-right"> <a th:href="@{/forgot-password}"> Forgot Password?</a></span>
             </label>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
