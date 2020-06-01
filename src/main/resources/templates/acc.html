@@ -349,26 +349,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>  
 
-<script>
-$(function() {
-
-	  $('input[name="daterange"]').daterangepicker({
-	      autoUpdateInput: false,
-	  }, function() {
-		  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-		      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-		      $('input[name="dateFrom"]').val(picker.startDate.format('DD/MM/YYYY'));
-		      $('input[name="dateTo"]').val(picker.endDate.format('DD/MM/YYYY'));
-		  });
-
-		  $('input[name="dateTo"]').on('cancel.daterangepicker', function(ev, picker) {
-		      $(this).val('');
-		  });
-	  });
-	});
-    
-    
-    
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
