@@ -1,0 +1,328 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>StartUp</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.foundation.min.css"> 
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.foundation.min.css"> 
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8">
+                            <div class="main-menu  d-none d-lg-block text-center">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a class="active" href="/">home</a></li>
+                                        <li><a href="/acc">Accommodation</a></li>
+                                        <li><a href="/watchlist">Share</a></li>
+                                        <li><a href="/login">log out</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+     <!-- bradcam_area  -->
+     <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                     <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">Our Accommodation</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /bradcam_area  -->
+      	
+	
+	<div data-scroll-index="0" class="get_in_tauch_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-50">
+                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">Search menu</h3>
+                    </div>
+                </div>  
+            </div>  
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="touch_form">
+                           <table border="0" cellspacing="5" cellpadding="5">
+                            <tbody>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                                        <input type="text" class="column_filter" id="country" placeholder="Country">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                                        <input type="text"  class="column_filter" id="addr" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                                        <input class="min" name="min" id="min" type="text" placeholder="Starting date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                                        <input class="max" name="max" id="max" type="text" placeholder="Ending date">
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                                    <input type="button" value="Clear dates" class="btn btn-primary" id="clear-dates">
+                                </div>
+ 							  </div>
+                            </div>
+                           	</tbody>
+   						 </table>
+                    </div>
+                </div>
+            </div>  
+            
+                    <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-xl-12">
+               <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
+                <table class="table table-striped" id = 'mytable' style="width:100%">
+
+                    
+                    <thead>
+                        <tr>
+                          <th class="text-left">Country</th>
+                            <th class="text-left">Address</th>
+                          <th class="text-left">From</th>
+                          <th class="text-left">To</th>
+                          <th class="text-left">Description</th>
+                            <th class="text-left">Comment</th>
+                            <th class="text-left"></th>
+                        </tr>
+                    </thead>
+
+
+                  <tbody>
+                  
+                    <tr th:each="watchlistItem : ${items}">
+                        <td th:text="${watchlistItem.country}"></td>
+                            <td th:text="${watchlistItem.address}"></td>
+                              <td th:text="${#dates.format(watchlistItem.dateFrom, 'dd/MM/yyyy')}"></td>
+                              <td th:text="${#dates.format(watchlistItem.dateTo, 'dd/MM/yyyy')}"></td>
+                              <td th:text="${watchlistItem.hdesc}"></td>
+                              <td th:text="${watchlistItem.comment}"></td>
+                      <td><a class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${watchlistItem.id})}">More</a></td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
+
+				</div>
+            </div>
+            </div>
+        </div>              
+       </div>
+	</div>
+
+
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-3">
+                        <div class="footer_logo wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
+                            <a href="index.html">
+                                <img src="img/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="socail_links">
+                            <ul>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s" href="#"> <i class="fa fa-twitter"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s" href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.3s">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/jquery-ui-clear.js"></script>
+
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>  
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		 
+	    // DataTable
+	    var table = $('#mytable').DataTable({
+			'sDom': 'rtip' ,
+		      orderCellsTop: true,
+		      responsive: true,
+			           columns: [
+			                      {className: "min-phone-l" },
+			                      {className: "all" },
+			                      {className: "all" }	,
+			                      {className: "all" }	,
+			                      {"bSearchable": false, "bSortable": false, className: "desktop"},
+			                      {"bSearchable": false, "bSortable": false, className: "desktop"},
+			                      {"bSearchable": false, "bSortable": false, className: "all" }
+			    ],
+	      initComplete: function () {
+
+	               $.fn.dataTable.ext.search.push(
+	        function (settings, data, dataIndex) {
+	            var min = $('#min').datepicker("getDate");
+	            var max = $('#max').datepicker("getDate");
+                var d = data[2].split("/");
+                var startDate = new Date(d[1]+ "/" +  d[0] +"/" + d[2]);
+                var d2 = data[3].split("/");
+                var endDate = new Date(d2[1]+ "/" +  d2[0] +"/" + d2[2]);
+                
+                
+                if (min == null && max == null) { return true; }
+                
+                if (max == null && min >= startDate) {
+                	if (min <= endDate){
+                	return true; }
+                }
+                
+                if (min == null && max >= startDate) {
+                	if (max <= endDate){
+                	return true; }
+                }
+                
+                
+                if (max >= startDate && max <= endDate && min >= startDate && min <= endDate) { return true; }
+                return false;
+	        }
+	        );
+
+	       
+	               $("#min").datepicker({ onSelect: function () { table.draw(); }, minDate: 0, dateFormat:"dd/mm/yy"});
+	               $("#max").datepicker({ onSelect: function () { table.draw(); }, minDate: 0, dateFormat:"dd/mm/yy" });
+	            var table = $('#mytable').DataTable(); 
+	      }
+	    });
+
+        function filterColumn () {
+            $('#mytable').DataTable().column(1).search(
+                $('#addr').val()
+            ).draw();
+            $('#mytable').DataTable().column(0).search(
+                $('#country').val()
+            ).draw();  
+              };
+
+           $('input.column_filter').on( 'keyup click', function () {
+                filterColumn( $(this).parents('div').attr('data-column') );
+            } );
+          	
+           var $dates = $('#min, #max').datepicker();
+           $('#clear-dates').on('click', function () {
+        	    $dates.datepicker('setDate', null);    
+        	    table.columns().search().draw();
+        	});
+
+	} );
+	</script>
+	
+</body>
+</html>
