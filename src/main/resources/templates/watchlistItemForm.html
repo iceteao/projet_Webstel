@@ -115,13 +115,10 @@
                               
                               
                               <div class = "form-group row ">
-                                 <label for = "country" class = "col-sm-2 col-form-label">Username id</label>
                                  <div class = "col-sm-6">
-                                   	<input type="text" class="form-control" id="txtUserIdAdd" name="userid" placeholder="userid" th:value="${#authentication.getPrincipal().getId()}"/>
+                                   	<input type="hidden" class="form-control" id="txtUserIdAdd" name="userid" placeholder="userid" th:value="${#authentication.getPrincipal().getId()}"/>
                                  </div>
-                                 <div class="col-sm-6">
 
-                              </div>
                               </div>
          
                               

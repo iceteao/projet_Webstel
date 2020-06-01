@@ -1,7 +1,4 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -20,7 +17,6 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.foundation.min.css"> 
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.foundation.min.css"> 
 
-    <!-- CSS here -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -33,7 +29,6 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
 <body>
@@ -55,16 +50,14 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="/">home</a></li>
-                                        <li><a href="/acc">Accommodation</a></li>
+                                        <li><a class="active" href="/acc">Accommodation</a></li>
                                         <li><a href="/watchlist">Share</a></li>
-                                       <li><a href="#">Account <i class="ti-angle-down"></i></a>
-                                       		<ul class="submenu">
-                                                <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
-                                               <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form></li>
+                                        <li><a href="#">Account <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="/login">Sign in</a></li>
                                                 <li><a href="/register">Sign up</a></li>
                                             </ul>
-                                      </li>
-                                    </ul>
+                                        </li>
                                 </nav>
                             </div>
                         </div>
@@ -138,7 +131,7 @@
                 </div>
             </div>  
             
-        <div class="container">
+                    <div class="container">
             <div class="row justify-content-center">
               <div class="col-xl-12">
                <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
@@ -167,22 +160,136 @@
                               <td th:text="${#dates.format(watchlistItem.dateTo, 'dd/MM/yyyy')}"></td>
                               <td th:text="${watchlistItem.hdesc}"></td>
                               <td th:text="${watchlistItem.comment}"></td>
-                      <td><a class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${watchlistItem.id})}">More</a></td>
+                      <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">More</a>
                     </tr>
                   </tbody>
                   
                 </table>
 
-				 </div>
-            	</div>
+				</div>
+            </div>
             </div>
         </div>              
        </div>
 	</div>
 
 
+    <!-- update watchlist start-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">	
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Edit accommodation</h4>
+        <hr/>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
 
+      <div class="modal-body">
+        <form th:action="@{/watchlistItemForm/update}" method="put">     
+           <div class="row justify-content-left">
+                <div class="col-xl-12">
+                    <div class="touch_form">  
+
+
+					<div class="mt-10">
+					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+					       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
+			         </div>
+			         
+			          
+
+					<div class="mt-10">
+						<span>Country</span>
+			            <input type="text" class="single-input" id="countryedit" name="country" placeholder="Country" onblur="this.placeholder = 'Country'" readonly>
+			         </div>
+
+			        
+			         
+					<div class="mt-10">
+					 	<span>Address</span>
+			            <input type="text" class="single-input" id="addressedit" name="address" placeholder="Address" onblur="this.placeholder = 'Address'" readonly>
+			          </div>
+          
+               <div class="input-group fetched-date">          
+
+ 					<div class="mt-10">
+ 						<span>From</span>
+						<input type="text" class="single-input" id ="dateFromedit" name="dateFrom" placeholder="Starting date" onblur="this.placeholder = 'Starting date'" readonly/>
+					</div>
+ 					
+ 					<div class="mt-10">
+ 					 	<span>To</span>
+                        <input type="text" class="single-input" id="dateToedit" name="dateTo" placeholder="Ending date" onblur="this.placeholder = 'Ending date'" readonly />
+                    </div>
+
+               </div>
+                          
+   					<div class="mt-10">
+   					 	<span>House description</span>
+			            <textarea class="single-input" name = "hdesc"  id ="hdescedit" rows = "2" placeholder = "House description" onblur="this.placeholder = 'House description'" readonly></textarea>            
+                    </div>
+
+        
+   					<div class="mt-10">
+   						<span>Service</span>
+				        <textarea name= "service" id="serviceedit" class = "single-input" rows = "2" placeholder = "Service that you want" onblur="this.placeholder = 'Service that you want'" readonly></textarea>
+               		</div>               
+        
+
+   					<div class="mt-10">
+   					   <span>Constraint</span>
+			           <textarea id="limitedit" name="limit" class = "single-input" rows = "2" placeholder = "The constraint/limitations that you want to impose" onblur="this.placeholder = 'The constraint/limitations that you want to impose'" readonly></textarea>
+		           </div>
+
+   					<div class="mt-10">
+   					   <span>Comment</span>
+			           <textarea id="commentedit" name="comment" class = "single-input" rows = "2" placeholder = "Some comment about the house" onblur="this.placeholder = 'Some comment about the house'" readonly></textarea>
+			     </div>
+
+
+						</div>
+					</div>
+			     </div>
+
+   
+     	 <div class="modal-footer">
+				<div class = "form-group row">
+						<button type="button" class="btn btn-primary">Book</button>
+	     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			 	</div>
+			 	</div>
+              		</form>
+           </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- update watchlist end-->
+ 
+ <!-- delete watchlist start-->
+ <div class="modal" id="deleteModal" tabindex="1" data-backdrop="false" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete watchlist end-->
 
     <!-- footer start -->
     <footer class="footer">
@@ -225,6 +332,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!--/ footer end  -->
+    
+    
+         <script type="text/javascript"  src="/js/main.js" ></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>  
+
+    
+    
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -255,14 +386,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
-	<script src="js/dataTableManager.js"></script>
+
 
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>  
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/dataTableManager.js"></script>
+	<script src="js/Jquery_dateformat.min.js"></script>
+	<script src="js/watchlist.js"></script>
 
-
+	<script type="text/javascript">
+	$(function() {
+		  $('.fetched-date input').datepicker({
+		    calendarWeeks: true,
+		    todayHighlight: true,
+		    autoclose: true,
+		    dateFormat:"dd/mm/yy",
+		    minDate: 0
+		  });
+		});
 	
+	</script>
 </body>
 </html>
