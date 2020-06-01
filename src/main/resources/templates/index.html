@@ -64,15 +64,15 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
                         <div class="col-lg-2 d-none d-lg-block">
                             <div class="log_chat_area d-flex align-items-end">
                             <span  class="say_hi" >Welcome &nbsp; </span>
                             <span  class="say_hi"  th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                         </div>
                     </div>
+                   <div class="col-12">
+                       <div class="mobile_menu d-block d-lg-none"></div>
+                  </div>
                 </div>
             </div>
         </div>

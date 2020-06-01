@@ -39,7 +39,6 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-    <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -70,15 +69,15 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
                         <div class="col-lg-2 d-none d-lg-block">
                             <div class="log_chat_area d-flex align-items-end">
                             <span  class="say_hi" >Welcome &nbsp; </span>
                             <span  class="say_hi"  th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                         </div>
                     </div>
+                   <div class="col-12">
+                       <div class="mobile_menu d-block d-lg-none"></div>
+                  </div>
                 </div>
             </div>
         </div>
