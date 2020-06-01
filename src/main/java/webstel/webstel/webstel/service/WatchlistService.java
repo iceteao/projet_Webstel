@@ -1,7 +1,6 @@
 package webstel.webstel.webstel.service;
 
 
-import webstel.webstel.webstel.Repository.ItemRepository;
 import webstel.webstel.webstel.Repository.ListRepository;
 import webstel.webstel.webstel.Repository.WatchlistRepository;
 
@@ -20,8 +19,6 @@ import webstel.webstel.webstel.exception.DuplicateAddressException;
 public class WatchlistService {
 	@Autowired
 	private ListRepository listRepository;
-	@Autowired
-	private ItemRepository itemRepository;
 	
 	WatchlistRepository watchlistRepository = new WatchlistRepository();
 	

@@ -16,7 +16,7 @@ public class SpringSecurityAuditorAware implements AuditorAware<String> {
 		
 		String username = authentication.getName();
 		UserPrincipal customUser = (UserPrincipal)authentication.getPrincipal();
-		int userid = customUser.getUserId();
+		int userId = customUser.getUserId();
 
 		return Optional.ofNullable(username).filter(s -> !s.isEmpty());
 	}
