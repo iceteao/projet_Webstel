@@ -1,4 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,13 +13,6 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">    
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"> 
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.foundation.min.css"> 
-	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.foundation.min.css"> 
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -29,9 +25,14 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
 <body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
     <!-- header-start -->
     <header>
         <div class="header-area ">
@@ -50,14 +51,16 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="/">home</a></li>
-                                        <li><a class="active" href="/acc">Accommodation</a></li>
+                                        <li><a href="/acc">Accommodation</a></li>
                                         <li><a href="/watchlist">Share</a></li>
-                                        <li><a href="#">Account <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="/login">Sign in</a></li>
-                                                <li><a href="/register">Sign up</a></li>
+                                        <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form></li>
+                                        <li><a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
+                                       		<ul class="submenu">
+                                                <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
+
+                                                <li><a sec:authorize="!isAuthenticated()" href="/register">Sign up</a></li>
                                             </ul>
-                                        </li>
+                                      </li>
                                 </nav>
                             </div>
                         </div>
