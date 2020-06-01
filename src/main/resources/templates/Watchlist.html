@@ -117,7 +117,7 @@
 
                   <tbody>
                   
-                    <tr th:each="watchlistItem : ${items}">
+                    <tr th:each="watchlistItem : ${useritems}">
                         <td th:text="${watchlistItem.country}"></td>
                             <td th:text="${watchlistItem.address}"></td>
                               <td th:text="${#dates.format(watchlistItem.dateFrom, 'dd/MM/yyyy')}"></td>
