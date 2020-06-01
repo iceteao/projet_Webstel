@@ -1,6 +1,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -56,7 +57,13 @@
                                         <li><a class="active" href="/">home</a></li>
                                         <li><a href="/acc">Accommodation</a></li>
                                         <li><a href="/watchlist">Share</a></li>
-                                        <li><a href="/login">log out</a></li>
+                                       <li><a href="#">Account <i class="ti-angle-down"></i></a>
+                                       		<ul class="submenu">
+                                                <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
+                                               <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form></li>
+                                                <li><a href="/register">Sign up</a></li>
+                                            </ul>
+                                      </li>
                                     </ul>
                                 </nav>
                             </div>
