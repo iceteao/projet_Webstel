@@ -98,31 +98,43 @@
                 <div class="col-lg-8">
                     <div class="touch_form">
                       <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">
-                           <form action="#" method="post" th:action="@{/watchlistItemForm}" th:object="${watchlistItem}">
+                           <form method="post" th:action="@{/watchlistItemForm/addNew}">
 
                               <div class = "form-group row ">
                                  <div class="col-sm-8">   
-                                    <span class="text-danger" th:errors="*{global}"> </span>
                                  </div>
                               </div>
                                           
                               <div class = "form-group row ">
                                  <label for = "country" class = "col-sm-2 col-form-label">Country</label>
                                  <div class = "col-sm-6">
-                                    <input th:field="*{country}" type = "text" class = "form-control" placeholder = "Country">
+                                    <input name="country" type = "text" class = "form-control" placeholder = "Country">
                                  </div>
                                  <div class="col-sm-6">
-                                    <span class="text-danger" th:errors="*{country}"> </span>     
+                                    <span class="text-danger"> </span>     
                               </div>
                               </div>
+                              
+                              
+                              
+                              <div class = "form-group row ">
+                                 <label for = "country" class = "col-sm-2 col-form-label">Username id</label>
+                                 <div class = "col-sm-6">
+                                   	<input type="text" class="form-control" id="txtUserIdAdd" name="userid" placeholder="userid" th:value="${#authentication.getPrincipal().getId()}"/>
+                                 </div>
+                                 <div class="col-sm-6">
+
+                              </div>
+                              </div>
+         
                               
                               <div class = "form-group row ">
                                  <label for = "address" class = "col-sm-2 col-form-label">Address</label>
                                  <div class = "col-sm-6">
-                                    <input th:field="*{address}" type = "text" class = "form-control" placeholder = "Address">
+                                    <input name="address"  type = "text" class = "form-control" placeholder = "Address">
                                  </div>
                                  <div class="col-sm-6">
-                                    <span class="text-danger" th:errors="*{address}"> </span>     
+                                    <span class="text-danger" > </span>     
                               </div>
                              </div>
                             
@@ -134,10 +146,10 @@
                           <input type="text" name="daterange" class="form-control" placeholder = "Any dates" />
                                   </div>
                               </div>
-                              <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>
-                              <input type="hidden" name="dateTo" th:field="*{dateTo}"/>
+                              <input type="hidden" name="dateFrom"/>
+                              <input type="hidden" name="dateTo"  />
                        <div class="col-sm-6">
-                                    <span class="text-danger" th:errors="*{dateFrom}"> </span>      
+                                    <span class="text-danger"> </span>      
                               </div>  
                           </div>
                           
@@ -147,10 +159,10 @@
                         <div class = "form-group row">
                           <label for = "desciription" class = "col-sm-2 col-form-label">House description</label>
                           <div class = "col-sm-6">
-                              <textarea th:field="*{hdesc}" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                              <textarea name = "hdesc"  class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
                            </div>
                            <div class="col-sm-6">
-                              <span class="text-danger" th:errors="*{hdesc}"> </span>      
+                              <span class="text-danger" > </span>      
                             </div>  
                         </div>
                                     
@@ -158,20 +170,20 @@
                         <div class = "form-group row">
                           <label for = "services" class = "col-sm-2 col-form-label">services</label>
                           <div class = "col-sm-6">
-                              <textarea th:field="*{service}" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                              <textarea name= "service" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
                            </div>
                            <div class="col-sm-6">
-                              <span class="text-danger" th:errors="*{service}"> </span>      
+                              <span class="text-danger"> </span>      
                             </div>  
                         </div>
                         
                         <div class = "form-group row">
                           <label for = "limit" class = "col-sm-2 col-form-label">constraints/limitations</label>
                           <div class = "col-sm-6">
-                              <textarea th:field="*{limit}" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                              <textarea name="limit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
                            </div>
                            <div class="col-sm-6">
-                              <span class="text-danger" th:errors="*{limit}"> </span>      
+                              <span class="text-danger" > </span>      
                             </div>  
                         </div>
                         
@@ -179,16 +191,16 @@
                         <div class = "form-group row">
                           <label for = "comments" class = "col-sm-2 col-form-label">Comments</label>
                           <div class = "col-sm-6">
-                              <textarea th:field="*{comment}" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                              <textarea name = "comment" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
                            </div>
                            <div class="col-sm-6">
-                              <span class="text-danger" th:errors="*{comment}"> </span>      
+                              <span class="text-danger"> </span>      
                             </div>  
                         </div>
                         
                         <div class = "form-group row">
                            <div class = "col-sm-10">
-                              <input type="hidden" th:field="*{id}" />
+                              <input type="hidden"  />
                               <button type = "submit" class = "btn btn-primary">Submit</button>
                            </div>
                         </div>
@@ -201,6 +213,136 @@
         </div>
     </div>
 
+
+    <!-- update watchlist start-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <form th:action="@{/watchlistItemForm/update}" method="put">
+  <div class="modal-dialog modal-lg" role="document" style="width:70%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Client Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form>
+		<div class = "form-group row ">
+                                 <div class="col-sm-8">   
+                                 </div>
+                              </div>
+                                          
+                              <div class = "form-group row ">
+                                 <label for = "country" class = "col-sm-2 col-form-label">Country</label>
+                                 <div class = "col-sm-6">
+                                    <input name="country" type = "text" class = "form-control" placeholder = "Country">
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <span class="text-danger"> </span>     
+                              </div>
+                              </div>
+                              
+                              
+                              
+                              <div class = "form-group row ">
+                                 <label for = "country" class = "col-sm-2 col-form-label">Username id</label>
+                                 <div class = "col-sm-6">
+                                   	<input type="text" class="form-control" id="txtUserIdAdd" name="userid" placeholder="userid" th:value="${#authentication.getPrincipal().getId()}"/>
+                                 </div>
+                                 <div class="col-sm-6">
+
+                              </div>
+                              </div>
+         
+                              
+                              <div class = "form-group row ">
+                                 <label for = "address" class = "col-sm-2 col-form-label">Address</label>
+                                 <div class = "col-sm-6">
+                                    <input name="address"  type = "text" class = "form-control" placeholder = "Address">
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <span class="text-danger" > </span>     
+                              </div>
+                             </div>
+                            
+                             
+                           <div class="form-group row">
+                              <label for = "dateRange" class = "col-sm-2 col-form-label">Dates</label>
+                              <div class="col-sm-6">
+                                  <div class="input-group">
+                          <input type="text" name="daterange" class="form-control" placeholder = "Any dates" />
+                                  </div>
+                              </div>
+                              <input type="hidden" name="dateFrom"/>
+                              <input type="hidden" name="dateTo"  />
+                       <div class="col-sm-6">
+                                    <span class="text-danger"> </span>      
+                              </div>  
+                          </div>
+                          
+                              
+
+                                                
+                        <div class = "form-group row">
+                          <label for = "desciription" class = "col-sm-2 col-form-label">House description</label>
+                          <div class = "col-sm-6">
+                              <textarea name = "hdesc"  class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                           </div>
+                           <div class="col-sm-6">
+                              <span class="text-danger" > </span>      
+                            </div>  
+                        </div>
+                                    
+                                    
+                        <div class = "form-group row">
+                          <label for = "services" class = "col-sm-2 col-form-label">services</label>
+                          <div class = "col-sm-6">
+                              <textarea name= "service" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                           </div>
+                           <div class="col-sm-6">
+                              <span class="text-danger"> </span>      
+                            </div>  
+                        </div>
+                        
+                        <div class = "form-group row">
+                          <label for = "limit" class = "col-sm-2 col-form-label">constraints/limitations</label>
+                          <div class = "col-sm-6">
+                              <textarea name="limit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                           </div>
+                           <div class="col-sm-6">
+                              <span class="text-danger" > </span>      
+                            </div>  
+                        </div>
+                        
+                        
+                        <div class = "form-group row">
+                          <label for = "comments" class = "col-sm-2 col-form-label">Comments</label>
+                          <div class = "col-sm-6">
+                              <textarea name = "comment" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                           </div>
+                           <div class="col-sm-6">
+                              <span class="text-danger"> </span>      
+                            </div>  
+                        </div>
+                        
+                        <div class = "form-group row">
+                           <div class = "col-sm-10">
+                              <input type="hidden"  />
+                              <button type = "submit" class = "btn btn-primary">Submit</button>
+                           </div>
+                        </div>
+		  <button type="submit" class="btn btn-primary">Sign in</button>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+ </form>
+</div>    
+ <!-- update watchlist end-->
 
 
 

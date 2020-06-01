@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 	
 @Entity
@@ -155,4 +158,41 @@ public class WatchlistItem {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+	@ManyToOne
+	@JoinColumn(name="userid", insertable=false, updatable=false)
+	private User user;
+	private int userid;
+
+	public int getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+
+	public static int getIndex() {
+		return index;
+	}
+
+
+	public static void setIndex(int index) {
+		WatchlistItem.index = index;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 }
+    

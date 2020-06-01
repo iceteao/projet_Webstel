@@ -7,7 +7,6 @@ $('document').ready(function() {
 		var href= $(this).attr('href');	
 		
 		$.get(href, function(watchlistItem, status){
-			$('#idEdit').val(watchlistItem.id);
 			$('#countryedit').val(watchlistItem.country);
 			$('#addressedit').val(watchlistItem.address);
 			$('#dateFromedit').val(watchlistItem.dateFrom);

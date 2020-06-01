@@ -160,7 +160,8 @@
                               <td th:text="${#dates.format(watchlistItem.dateTo, 'dd/MM/yyyy')}"></td>
                               <td th:text="${watchlistItem.hdesc}"></td>
                               <td th:text="${watchlistItem.comment}"></td>
-                      <td><a class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${watchlistItem.id})}">More</a></td>
+                      <td><a class="btn btn-info" id="editButton"  th:href="@{/watchlistItemForm/findById/(id=${watchlistItem.id})}">Update</a>
+                      <a th:href="@{/watchlistItemForm/delete/(id=${watchlistItem.id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
                     </tr>
                   </tbody>
                   
@@ -174,6 +175,116 @@
 	</div>
 
 
+    <!-- update watchlist start-->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/watchlistItemForm/update}" method="put">     
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Username id:</label>
+       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
+          </div>
+         
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Country:</label>
+            <input type="text" class="form-control" id="countryedit" name="country">
+          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Address:</label>
+            <input type="text" class="form-control" id="addressedit" name="address">
+          </div>
+          
+          
+               <div class="form-group row">
+                              <label for = "dateRange" class = "col-sm-2 col-form-label">Dates</label>
+                              <div class="col-sm-6">
+                                  <div class="input-group">
+                          <input type="text" name="daterange" class="form-control" placeholder = "Any dates" />
+                                  </div>
+                              </div>
+                              <input type="text" id ="dateFromedit" name="dateFrom"/>
+                              <input type="text" id="dateToedit" name="dateTo"  />
+                       <div class="col-sm-6">
+                                    <span class="text-danger"> </span>      
+                              </div>  
+                          </div>
+                          
+        
+                   
+ 
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">House description</label>
+             <div class = "col-sm-6">
+              <textarea name = "hdesc"  id =" hdescedit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+                           </div>
+                           
+                          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">services:</label>
+            <div class = "col-sm-6">
+              <textarea name= "service" id="serviceedit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+               </div>
+               </div>               
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">constraints/limitations</label><div class = "col-sm-6">
+           <textarea id="limitedit" name="limit" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+           </div>
+           </div>
+           
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Comments</label><div class = "col-sm-6">
+           <textarea id="commentedit" name="comment" class = "form-control" rows = "3" placeholder = "Max. 50 chars"></textarea>
+           </div>
+           </div>
+
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>        
+        </div> 
+             
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- update watchlist end-->
+ 
+ <!-- delete watchlist start-->
+ <div class="modal" id="deleteModal" tabindex="1" data-backdrop="false" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete watchlist end-->
 
     <!-- footer start -->
     <footer class="footer">
@@ -216,6 +327,48 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!--/ footer end  -->
+    
+    
+         <script type="text/javascript"  src="/js/main.js" ></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>  
+
+<script>
+$(function() {
+
+	  $('input[name="daterange"]').daterangepicker({
+	      autoUpdateInput: false,
+	  }, function() {
+		  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+		      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+		      $('input[name="dateFrom"]').val(picker.startDate.format('DD/MM/YYYY'));
+		      $('input[name="dateTo"]').val(picker.endDate.format('DD/MM/YYYY'));
+		  });
+
+		  $('input[name="dateTo"]').on('cancel.daterangepicker', function(ev, picker) {
+		      $(this).val('');
+		  });
+	  });
+	});
+    
+    
+    
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -327,6 +480,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	} );
 	</script>
+	<script src="/js/watchlist.js"></script>
 	
 </body>
 </html>

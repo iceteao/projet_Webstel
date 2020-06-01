@@ -1,0 +1,39 @@
+
+.buttonInside{
+  position:relative;
+  margin-bottom:10px;
+}
+#econtainer{
+  width: 300px;
+}
+#max{
+  height:25px;
+  width:100%;
+  padding-left:10px;
+  border-radius: 4px;
+  border:none;outline:none;
+}
+
+#min{
+  height:25px;
+  width:100%;
+  padding-left:10px;
+  border-radius: 4px;
+  border:none;outline:none;
+}
+#erase{
+  position:absolute;
+  right: 0px;
+  top: 4px;
+  border:none;
+  height:20px;
+  width:20px;
+  border-radius:100%;
+  outline:none;
+  text-align:center;
+  font-weight:bold;
+  padding:2px;
+}
+#erase:hover{
+  cursor:pointer;
+}
