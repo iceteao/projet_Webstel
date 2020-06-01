@@ -9,5 +9,5 @@ import webstel.webstel.webstel.WatchlistItem;
 @Repository
 public interface ItemRepository extends JpaRepository<WatchlistItem, Integer> {
 
-    public WatchlistItem findById(int id);
+    public WatchlistItem findById(String id);
 }

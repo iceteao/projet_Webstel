@@ -1,6 +1,7 @@
 package webstel.webstel.webstel.Controller;
 
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import webstel.webstel.webstel.User;
+import webstel.webstel.webstel.UserPrincipal;
 import webstel.webstel.webstel.WatchlistItem;
 import webstel.webstel.webstel.Repository.ItemRepository;
+import webstel.webstel.webstel.Repository.ListRepository;
 import webstel.webstel.webstel.exception.DuplicateAddressException;
 import webstel.webstel.webstel.service.SaveService;
 import webstel.webstel.webstel.service.WatchlistService;
@@ -36,6 +42,9 @@ public class WatchlistController {
 	@Autowired
 	ItemRepository itemRepository;
 	@Autowired
+	ListRepository listRepository;
+	
+	@Autowired
 	private WatchlistService watchlistService;
 	
 	
@@ -46,61 +55,22 @@ public class WatchlistController {
 		return "watchlistItemForm";
 	}	
 	
-	
-//	public ModelAndView showWatchlistItemForm(@RequestParam(required = false) Integer id) {
-//		
-//		String viewName = "watchlistItemForm";
-//		
-//		Map<String,Object> model = new HashMap<String,Object>();
-//		
-//		WatchlistItem watchlistItem = watchlistService.findWatchlistItemById(id);
-//		
-//		if (watchlistItem == null) {
-//			model.put("watchlistItem", new WatchlistItem());	
-//		} else {
-//			model.put("watchlistItem", watchlistItem);
-//		}
-//		return new ModelAndView(viewName,model); 
-//	}
-
-//	@RequestMapping(value="/watchlistItemForm",  method = RequestMethod.POST)
-//	public ModelAndView submitWatchlistItemForm(@Valid WatchlistItem watchlistItem, BindingResult bindingResult) {
-//		ModelAndView modelAndView = new ModelAndView();
-//		if (bindingResult.hasErrors()) {
-//			return new ModelAndView("watchlistItemForm");
-//		}
-//		else {
-//			saveService.saveWatchlistItem(watchlistItem);
-//		}
-//		try {
-//			watchlistService.addOrUpdateWatchlistItem(watchlistItem);
-//		} catch (DuplicateAddressException e) {
-//			bindingResult.rejectValue("address", "", "This address is already being used");
-//			return new ModelAndView("watchlistItemForm");
-//		}
-//		RedirectView redirect = new RedirectView();
-//		redirect.setUrl("/watchlist");
-//		
-//
-//		return new ModelAndView(redirect);
-//	}
-	
 	@RequestMapping(value="/watchlistItemForm/addNew", method= {RequestMethod.POST})
 	public String addNew(WatchlistItem watchlistitem) {
 		watchlistService.save(watchlistitem);
-		return "redirect:/acc";
+		return "redirect:/watchlist";
 	}
 	
 	@RequestMapping(value="/watchlistItemForm/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		watchlistService.delete(id);
-		return "redirect:/acc";
+		return "redirect:/watchlist";
 	}
 	
 	@RequestMapping(value="/watchlistItemForm/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(WatchlistItem watchlistitem) {
 		watchlistService.save(watchlistitem);
-		return "redirect:/acc";
+		return "redirect:/watchlist";
 	}
 	
 
@@ -118,6 +88,25 @@ public class WatchlistController {
 		return new ModelAndView(viewName,model);	
 		
 	}
+	
+	@GetMapping(value = "/watchlist")
+	public ModelAndView getUserWatchlistItem(Authentication auth, Integer userid) {
+		String viewName= "watchlist";
+		auth = SecurityContextHolder.getContext().getAuthentication();
+		userid  = ((UserPrincipal)auth.getPrincipal()).getId();
+		
+		List<WatchlistItem> useritems = listRepository.findbyUser(userid);
+
+		Map<String,Object> model = new HashMap<String,Object>();
+				
+		model.put("useritems", useritems);
+		model.put("numberOfAccommodation", watchlistService.getWatchlistItemsSize());
+		
+		return new ModelAndView(viewName,model);	
+		
+	}
+	
+	
 	@RequestMapping("watchlistItemForm/findById")
 	@ResponseBody 
 	public Optional<WatchlistItem> findById(int id) {
@@ -125,16 +114,5 @@ public class WatchlistController {
 	}
 	
 		
-	@GetMapping("/watchlist")
-	public ModelAndView getWatchlist() {
-		
-		String viewName= "watchlist";
-		
-		Map<String,Object> model = new HashMap<String,Object>();
-				
-		model.put("watchlistItems", watchlistService.getWatchlistItems());
-		model.put("numberOfAccommodation", watchlistService.getWatchlistItemsSize());
-		
-		return new ModelAndView(viewName,model);		
-	}
+	
 }
