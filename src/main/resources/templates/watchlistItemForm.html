@@ -30,7 +30,6 @@
 </head>
    
 <body>
-
      <!-- header-start -->
     <header>
         <div class="header-area ">
@@ -48,11 +47,12 @@
                             <div class="main-menu  d-none d-lg-block text-center">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="active" href="/">home</a></li>
+                                        <li><a class="active" href="/">home &nbsp;</a></li>
                                         <li><a href="/acc">Accommodation</a></li>
-                                        <li><a href="/watchlist">Share</a></li>
-                                        <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form></li>
-                                        <li><a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
+                                        <li><a sec:authorize="isAuthenticated()" href="/watchlist">Share</a>
+                                        <a sec:authorize="!isAuthenticated()" href="/login">Share</a></li>
+                                        <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form>
+                                        <a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
                                        		<ul class="submenu">
                                                 <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
                                                 <li><a sec:authorize="!isAuthenticated()" href="/register">Sign up</a></li>
@@ -78,7 +78,8 @@
       </div>
     </header>
     <!-- header-end -->
-
+    
+    
      <!-- bradcam_area  -->
      <div class="bradcam_area bradcam_bg_1">
         <div class="container">
