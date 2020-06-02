@@ -22,7 +22,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.anonymous().and()
 		.authorizeRequests()
-			.antMatchers("/login", "/resources/**", "/css/**", "/fonts/**", "/img/**").permitAll()
+			.antMatchers("/login","/acc","/", "/resources/**", "/css/**", "/fonts/**", "/img/**").permitAll()
 			.antMatchers("/register", "/resources/**", "/css/**", "/fonts/**", "/img/**", "/js/**","/Acss/**","/js/**","/Ajs/**").permitAll()
 			.antMatchers("/users/addNew").permitAll()
 			.antMatchers("/resources/**","/resources/js/**").permitAll()
