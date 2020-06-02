@@ -65,6 +65,9 @@ public class User {
 
 	@OneToMany(mappedBy="user")
 	private List<WatchlistItem> listitem;
+	
+	@OneToMany(mappedBy="user")
+	private List<ProfileDetails> profiledetails;
 
 	
 }

@@ -13,25 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import webstel.webstel.webstel.ProfileDetails;
 import webstel.webstel.webstel.UserPrincipal;
-import webstel.webstel.webstel.WatchlistItem;
+
 import webstel.webstel.webstel.Repository.DetailRepository;
 import webstel.webstel.webstel.Repository.ItemRepository;
-import webstel.webstel.webstel.Repository.ListRepository;
+
 import webstel.webstel.webstel.service.ProfileDetailService;
-import webstel.webstel.webstel.service.SaveService;
-import webstel.webstel.webstel.service.WatchlistService;
+
+
 
 
 @Controller
@@ -51,7 +48,7 @@ public class ProfileDetailsController {
 //		return "ProfileDetails";
 //	}	
 	
-	@RequestMapping(value="/profiledetails/addNew", method= {RequestMethod.POST})
+	@RequestMapping(value="/profile/addNew", method= {RequestMethod.POST})
 	public String addNew(ProfileDetails profiledetail) {
 		profiledetailService.save(profiledetail);
 		return "redirect:/watchlist";
@@ -63,10 +60,10 @@ public class ProfileDetailsController {
 //		return "redirect:/watchlist";
 //	}
 //	
-	@RequestMapping(value="/profiledetails/update", method= {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/profile/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(ProfileDetails profiledetail) {
 		profiledetailService.save(profiledetail);
-		return "redirect:/watchlist";
+		return "redirect:/profile";
 	}
 
 	
@@ -84,7 +81,7 @@ public class ProfileDetailsController {
 	}
 	
 	
-	@RequestMapping("profiledetails/findById")
+	@RequestMapping("/profile/findById")
 	@ResponseBody 
 	public Optional<ProfileDetails> findById(int id) {
 		return profiledetailService.findById(id);
