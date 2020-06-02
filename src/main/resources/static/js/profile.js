@@ -10,7 +10,7 @@ $('document').ready(function() {
 		$.get(href, function(profiledetails, status){
 			$('#idEdit').val(profiledetails.id);
 			$('#aboutmeEdit').val(profiledetails.aboutme);
-			$('#countryedit').val(profiledetails.country);
+			$('#countryEdit').val(profiledetails.country);
 			$('#mobileEdit').val(profiledetails.mobile);
 			$('#websiteEdit').val(profiledetails.website);
 		});	
