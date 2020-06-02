@@ -121,6 +121,7 @@
                            <div class="row">
                             <p><span> Email address </span>: <span class="username" th:text="${#authentication.getPrincipal().getEmail()}">Guest</span>
                           </div>
+                          
                            <div th:each="profiledetails : ${userdetails}">
                            <div class="row">
                             <p><span> About me </span>: <span class="username" th:defaultValue="null" th:text="${profiledetails.aboutme}">Guest</span>
@@ -134,8 +135,10 @@
                            <div class="row">
                             <p><span> my website </span>: <span class="username"th:defaultValue="null" th:text="${profiledetails.website}">Guest</span>
                           </div>
-                          <div><a class="btn btn-info"  data-toggle="modal" id="editButton" th:href="@{/profile/findById/(id=${profiledetails.id})}"> Update</a></div>
+                          </div><
+                          	<div> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" >profile info</button>
                           </div>
+                          
                         </div>
                       </div>
                         
@@ -143,14 +146,69 @@
                       </div>
 
                   </div>
+                  <br>
+                  <br>
+
+                 
+
+
+
+                  
+                  
+                  
+ <!-- edit-profile -->
+ <div class="modal fade" id="addModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Country</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/profile/addNew}" method="post">
+        
+         <div class="form-group">
+            <label for="recipient-name" class="col-form-label">About me</label>
+            <div class="mt-10">
+				<input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+				<input class="form-control" th:value="${#authentication.getPrincipal().getId()}" name="id" readonly>
+			</div>
+			         
           </div>
-
-
-                  
-                  
-                  
-                  <!-- edit-profile -->
-
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">About me</label>
+            <input type="text" class="form-control" id="aboutme" name="aboutme">
+          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Country</label>
+            <input type="text" class="form-control" id="counntry" name="country">
+          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Mobile</label>
+            <input type="text" class="form-control" id="recipient-name" name="mobile">
+          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Website</label>
+            <input type="text" class="form-control" id="recipient-name" name="website">
+          </div>                    
+        
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>        
+        </div>             
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
                   <!-- edit-profile -->
                   
  
@@ -159,78 +217,12 @@
 	
 	
 	
+	<!-- update -->
+
 	
 	
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">	
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Edit profile</h4>
-        <hr/>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
 
-
-      <div class="modal-body">
-        <form th:action="@{/profile/update}" method="put">     
-           <div class="row justify-content-left">
-                <div class="col-xl-12">
-                    <div class="touch_form">  
-
-
-					<div class="mt-10">
-					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
-					       <input type="" class="form-control" id="idEdit" name="id" readonly>
-			         </div>
-			         
-			          
-
-					<div class="mt-10">
-						<span>About me</span>
-			            <input type="text" class="single-input" id="aboutmeEdit" name="aboutme" placeholder="AboutMe" onblur="this.placeholder = 'About Me'">
-			         </div>
-
-			        
-			         
-					<div class="mt-10">
-					 	<span>country</span>
-			            <input type="text" class="single-input" id="countryEdit" name="country" placeholder="country" onblur="this.placeholder = 'Country'">
-			          </div>
-          
-               <div class="input-group fetched-date">          
-
- 					<div class="mt-10">
- 						<span>Mobile</span>
-						<input type="text" class="single-input" id ="mobileEdit" name="mobile" placeholder="mobile" onblur="this.placeholder = 'mMobile'"/>
-					</div>
- 					
- 					<div class="mt-10">
- 					 	<span>Website</span>
-                        <input type="text" class="single-input" id="websiteEdit" name="website" placeholder="website" onblur="this.placeholder = 'My Website'" />
-                    </div>
-
-               </div>
-                          
- 
-						</div>
-					</div>
-			     </div>
-
-   
-     	 <div class="modal-footer">
-				<div class = "form-group row">
-						<button type="submit" class="btn btn-primary">Submit</button>
-	     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			 	</div>
-			 	</div>
-              		</form>
-           </div>
-      </div>
-    </div>
-  </div>
-	
+	<!-- update -->
 	
 
    

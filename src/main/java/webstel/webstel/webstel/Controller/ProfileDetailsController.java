@@ -51,7 +51,7 @@ public class ProfileDetailsController {
 	@RequestMapping(value="/profile/addNew", method= {RequestMethod.POST})
 	public String addNew(ProfileDetails profiledetail) {
 		profiledetailService.save(profiledetail);
-		return "redirect:/watchlist";
+		return "redirect:/profile";
 	}
 	
 //	@RequestMapping(value="/profiledetails/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
