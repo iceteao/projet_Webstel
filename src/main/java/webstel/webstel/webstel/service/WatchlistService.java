@@ -42,26 +42,6 @@ public class WatchlistService {
 		return listRepository.findById(id);
 	}
 	
-//	public void addOrUpdateWatchlistItem(WatchlistItem watchlistItem) throws DuplicateAddressException {
-//		
-//		WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
-//
-//		if (existingItem == null) {
-//			if (watchlistRepository.findByAddress(watchlistItem.getAddress())!=null) {
-//				throw new DuplicateAddressException();
-//			}
-//			watchlistRepository.addItem(watchlistItem);
-//		} else {
-//			existingItem.setCountry(watchlistItem.getCountry());
-//			existingItem.setDateFrom(watchlistItem.getDateFrom());
-//			existingItem.setDateTo(watchlistItem.getDateTo());
-//			existingItem.setHdesc(watchlistItem.getHdesc());
-//			existingItem.setService(watchlistItem.getService());
-//			existingItem.setLimit(watchlistItem.getLimit());
-//			existingItem.setComment(watchlistItem.getComment());
-//			existingItem.setAddress(watchlistItem.getAddress());  
-//		}
-//	}
 
 	public void delete(Integer id) {
 		listRepository.deleteById(id);
