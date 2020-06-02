@@ -63,10 +63,10 @@ public class ProfileDetailsController {
 //		return "redirect:/watchlist";
 //	}
 //	
-	@RequestMapping(value="/profiledetails/update", method= {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/Profile/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(ProfileDetails profiledetail) {
 		profiledetailService.save(profiledetail);
-		return "redirect:/watchlist";
+		return "redirect:/profile";
 	}
 
 	
@@ -84,7 +84,7 @@ public class ProfileDetailsController {
 	}
 	
 	
-	@RequestMapping("profiledetails/findById")
+	@RequestMapping("Profile/findById")
 	@ResponseBody 
 	public Optional<ProfileDetails> findById(int id) {
 		return profiledetailService.findById(id);
