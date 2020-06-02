@@ -29,6 +29,10 @@
 </head>
 
 <body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
     <!-- header-start -->
     <header>
         <div class="header-area ">
@@ -46,12 +50,11 @@
                             <div class="main-menu  d-none d-lg-block text-center">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="active" href="/">home &nbsp;</a></li>
+                                        <li><a class="active" href="/">home</a></li>
                                         <li><a href="/acc">Accommodation</a></li>
-                                        <li><a sec:authorize="isAuthenticated()" href="/watchlist">Share</a>
-                                        <a sec:authorize="!isAuthenticated()" href="/login">Share</a></li>
-                                        <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form>
-                                        <a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
+                                        <li><a href="/watchlist">Share</a></li>
+                                        <li><form method="POST" sec:authorize="isAuthenticated()" th:action="@{/logout}" > <a href="#" onclick='this.parentNode.submit(); return false;'>logout</a></form></li>
+                                        <li><a sec:authorize="!isAuthenticated()"  href="#">Account <i class="ti-angle-down"></i></a>
                                        		<ul class="submenu">
                                                 <li><a sec:authorize="!isAuthenticated()" href="/Login">Sign in</a></li>
                                                 <li><a sec:authorize="!isAuthenticated()" href="/register">Sign up</a></li>
@@ -64,8 +67,8 @@
                         <div class="col-lg-2 d-none d-lg-block">
                             <div class="log_chat_area d-flex align-items-end">
                             <span  class="say_hi" >Welcome &nbsp; </span>
-                            <a href="/profile" class="say_hi" sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}"></a>
-                       		<span  class="say_hi" sec:authorize="!isAuthenticated()">Guest</span>
+                            <span  class="say_hi" sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                       		<span  class="say_hi" sec:authorize="isAuthenticated()">Guest</span>
                         </div>
                     </div>
                    <div class="col-12">
@@ -102,37 +105,8 @@
                 </div>  
             </div>  
             
-     <div class="row">
-          <div class="col-lg-12">
-            <section class="panel">
-              <header class="panel-heading tab-bg-info">
-                <ul class="nav nav-tabs">
-               
-                  <li class="active">
-                    <a data-toggle="tab" href="#profile">
-                  <i class="icon-user"></i>
-                   Profile &nbsp; &nbsp;</a>
-                  
-                  </li>
-                   
- 			<li class="">
-                    <a data-toggle="tab" href="#edit-profile">
-                   <i class="icon-envelope"></i>
-                    Edit</a>
-                  </li>
-                </ul>
-              </header>
-              
-                
-              <div class="panel-body">
-                <div class="tab-content">
-                  <!-- profile -->
-                  <div id="profile" class="tab-pane">
-                    <section class="panel">
-                      <div class="bio-graph-heading"></div>
-                      <div class="panel-body bio-graph-info">
-                        <h1>My profile</h1>
-					<div class="section-top-border">    
+       <div class="row">
+          <div class="col-lg-12">    
                      	<div>
                           <div class="row">
                             <p><span>First Name </span>: <span class="username" th:text="${#authentication.getPrincipal().getFirstname()}"></span>
@@ -159,86 +133,104 @@
                            <div class="row">
                             <p><span> my website </span>: <span class="username" th:text="${profiledetails.website}">Guest</span>
                           </div>
+                          <div><a class="btn btn-info"  data-toggle="modal" id="editButton" th:href="@{/profile/findById/(id=${profiledetails.id})}"> Update</a></div>
                           </div>
                         </div>
                       </div>
                         
                         
                       </div>
-                    </section> 
+
                   </div>
-                  
-                  
-                  <!-- edit-profile -->
-                        <div id="edit-profile" class="tab-panel">
-                    <section class="panel">
-                      <div class="panel-body bio-graph-info">
-                        <h1> Profile Info</h1>
-                        <form class="form-horizontal" role="form" th:action="@{/profile/update}" id ="editdetails">
-                         <div class="form-group">
-                      <div class="mt-10">
-					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
-					       <input type="hidden" class="form-control" id="idEdit" name="id" readonly>
-			         </div>
-                         
-                            <label class="col-lg-2 control-label">About me</label>
-                            <div class="col-lg-6">
-								<input type="text" class="single-input" id="aboutmeEdit" name="aboutme" placeholder="about me" onblur="this.placeholder='About me'">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Country</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="single-input" id="countryEdit" name="country" placeholder="country" onblur="this.placeholder='Country'">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Mobile</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="single-input" id="mobileEdit" name="mobile" placeholder="mobile" onblur="this.placeholder='mobile'">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">My website</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="single-input" id="websiteEdit" name="website" placeholder="website" onblur="this.placeholder='website'">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" class="btn btn-primary">Save</button>
-                              <button type="button" class="btn btn-danger">Cancel</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </section>
-                  </div>
-                  <!-- edit-profile -->
-                  
-                  
-                </div>
-              
-              </div>
-            
-            
-            </section>
           </div>
-        </div>
+
+
+                  
+                  
+                  
+                  <!-- edit-profile -->
+
+                  <!-- edit-profile -->
+                  
+ 
             
 
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-       </div>
-	</div>
+	
+	
+	
+	
+	
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">	
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Edit profile</h4>
+        <hr/>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <div class="modal-body">
+        <form th:action="@{/profile/update}" method="put">     
+           <div class="row justify-content-left">
+                <div class="col-xl-12">
+                    <div class="touch_form">  
+
+
+					<div class="mt-10">
+					       <input type="hidden" placeholder="userid" class="form-control" th:value="${#authentication.getPrincipal().getId()}" id="userid" name="userid" readonly>
+					       <input type="" class="form-control" id="idEdit" name="id" readonly>
+			         </div>
+			         
+			          
+
+					<div class="mt-10">
+						<span>About me</span>
+			            <input type="text" class="single-input" id="aboutmeEdit" name="aboutme" placeholder="AboutMe" onblur="this.placeholder = 'About Me'">
+			         </div>
+
+			        
+			         
+					<div class="mt-10">
+					 	<span>country</span>
+			            <input type="text" class="single-input" id="countryEdit" name="country" placeholder="country" onblur="this.placeholder = 'Country'">
+			          </div>
+          
+               <div class="input-group fetched-date">          
+
+ 					<div class="mt-10">
+ 						<span>Mobile</span>
+						<input type="text" class="single-input" id ="mobileEdit" name="mobile" placeholder="mobile" onblur="this.placeholder = 'mMobile'"/>
+					</div>
+ 					
+ 					<div class="mt-10">
+ 					 	<span>Website</span>
+                        <input type="text" class="single-input" id="websiteEdit" name="website" placeholder="website" onblur="this.placeholder = 'My Website'" />
+                    </div>
+
+               </div>
+                          
+ 
+						</div>
+					</div>
+			     </div>
+
+   
+     	 <div class="modal-footer">
+				<div class = "form-group row">
+						<button type="submit" class="btn btn-primary">Submit</button>
+	     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			 	</div>
+			 	</div>
+              		</form>
+           </div>
+      </div>
+    </div>
+  </div>
+	
+	
 
    
  <!-- delete watchlist start-->
@@ -306,8 +298,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!--/ footer end  -->
-    
-    
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js">
+</script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script> 
+    <script type="text/javascript"  src="js/profile.js"></script>
          <script type="text/javascript"  src="/js/main.js" ></script>
 
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -360,7 +358,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="js/dataTableManager.js"></script>
 	<script src="js/Jquery_dateformat.min.js"></script>
-	<script src="js/users.js"></script>
+	
 
 	<script type="text/javascript">
 	$(function() {
@@ -372,7 +370,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		    minDate: 0
 		  });
 		});
-	
 	</script>
 </body>
 </html>
